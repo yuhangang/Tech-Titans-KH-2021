@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:tech_titans/components/custom_app_bar.dart';
 import 'package:tech_titans/providers/theme_provider.dart';
 import 'package:tech_titans/routes.dart';
 import 'package:tech_titans/screens/account/account_page.dart';
@@ -12,6 +14,9 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+    ));
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
@@ -22,7 +27,8 @@ class MyApp extends StatelessWidget {
         builder: (_, themeProvider, child) {
           return MaterialApp(
             title: 'Flutter Demo',
-            theme: themeProvider.appTheme,
+            theme: themeProvider.appTheme(),
+            darkTheme: themeProvider.appTheme(isSystemDarkMode: true),
             routes: PageRoutes.routes,
             home: MyHomePage(title: 'Flutter Demo Home Page'),
           );
@@ -73,10 +79,9 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+      appBar: CustomAppBar(
+        title: widget.title,
+        leading: Container(),
         actions: [
           IconButton(
               icon: Icon(

@@ -6,8 +6,8 @@ class ThemeProvider extends ChangeNotifier {
   bool _isDarkTheme = false;
   bool get isDarkTheme => _isDarkTheme;
 
-  ThemeData get appTheme =>
-      ThemeBuilder.buildThemeData(themeColorIndex: 0, isDarkMode: _isDarkTheme);
+  ThemeData appTheme({bool? isSystemDarkMode}) => ThemeBuilder.buildThemeData(
+      themeColorIndex: 0, isDarkMode: isSystemDarkMode ?? _isDarkTheme);
 
   void setDarkMode(bool _) {
     _isDarkTheme = _;
