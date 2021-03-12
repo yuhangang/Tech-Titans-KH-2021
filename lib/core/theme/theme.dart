@@ -18,38 +18,40 @@ abstract class ThemeBuilder {
 
   static ThemeData lightTheme(bool isDarkMode, int themeColorIndex) {
     return ThemeData(
-      primaryColor: Colors.white,
-      primaryColorDark: Colors.grey[800],
-      accentColor: Colors.grey[400],
-      fontFamily: 'Open Sans',
-      splashColor: Colors.white,
-      canvasColor: Color(0xFFCECBC6),
-      dividerTheme: DividerThemeData(
-          color: Colors.grey[400], indent: 15, endIndent: 15, space: 0),
-      splashFactory: NoSplashFactory(),
-      primaryTextTheme: TextTheme(button: TextStyle(color: Colors.grey[800])),
-      dialogBackgroundColor: Colors.white,
-      dialogTheme: DialogTheme(backgroundColor: Colors.white),
-      appBarTheme: AppBarTheme(
-          backgroundColor: Colors.transparent,
-          brightness: Brightness.light,
-          titleTextStyle: TextStyle(color: Colors.grey[800])),
-      scaffoldBackgroundColor: colorThemeList[themeColorIndex],
-      textButtonTheme: TextButtonThemeData(
-          style: ButtonStyle(
-              foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
-              textStyle: MaterialStateProperty.all<TextStyle>(
-                  TextStyle(color: Colors.white)))),
-      textTheme: TextTheme(
-        headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
-        headline6: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
-        bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
-      ),
-      pageTransitionsTheme: PageTransitionsTheme(builders: {
-        TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
-        TargetPlatform.android: CupertinoPageTransitionsBuilder(),
-      }),
-    );
+        primaryColor: Colors.white,
+        primaryColorDark: Colors.grey[800],
+        accentColor: Colors.grey[400],
+        fontFamily: 'Open Sans',
+        splashColor: Colors.white,
+        canvasColor: Color(0xFFCECBC6),
+        dividerTheme: DividerThemeData(
+            color: Colors.grey[400], indent: 15, endIndent: 15, space: 0),
+        splashFactory: NoSplashFactory(),
+        primaryTextTheme: TextTheme(button: TextStyle(color: Colors.grey[800])),
+        dialogBackgroundColor: Colors.white,
+        dialogTheme: DialogTheme(backgroundColor: Colors.white),
+        appBarTheme: AppBarTheme(
+            backgroundColor: Colors.transparent,
+            brightness: Brightness.light,
+            titleTextStyle: TextStyle(color: Colors.grey[800])),
+        scaffoldBackgroundColor: colorThemeList[themeColorIndex],
+        textButtonTheme: TextButtonThemeData(
+            style: ButtonStyle(
+                foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
+                textStyle: MaterialStateProperty.all<TextStyle>(
+                    TextStyle(color: Colors.white)))),
+        textTheme: TextTheme(
+          headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
+          headline6: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
+          bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
+        ),
+        pageTransitionsTheme: PageTransitionsTheme(builders: {
+          TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+          TargetPlatform.android: CupertinoPageTransitionsBuilder(),
+        }),
+        bottomNavigationBarTheme: BottomNavigationBarThemeData(
+            selectedIconTheme: IconThemeData(color: Colors.lightGreen),
+            selectedItemColor: Colors.lightGreen));
   }
 
   static ThemeData darkTheme(bool isDarkMode, int themeColorIndex) {

@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tech_titans/components/custom_app_bar.dart';
+import 'package:tech_titans/core/alert/alert_helper.dart';
 import 'package:tech_titans/core/push_notification/src/notification_show/notification_helper.dart';
 import 'package:tech_titans/providers/auth_provider.dart';
 import 'package:tech_titans/providers/summary_provider.dart';
@@ -43,6 +44,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
+    //Future.delayed(Duration.zero, () => AlertDialogHelper.showMonthlyDialog());
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
@@ -50,6 +52,18 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        items: [
+          BottomNavigationBarItem(
+              icon: Icon(CupertinoIcons.home), label: "dashboard"),
+          BottomNavigationBarItem(
+              icon: Icon(CupertinoIcons.chart_bar), label: "stat"),
+          BottomNavigationBarItem(
+              icon: Icon(CupertinoIcons.globe), label: "explore")
+        ],
+      ),
       appBar: CustomAppBar(
         title: "HOME",
         leading: Container(),
@@ -73,26 +87,10 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
       body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
         child: Container(
           width: screenWidth,
           height: screenWidth,
           child: Column(
-            // Column is also a layout widget. It takes a list of children and
-            // arranges them vertically. By default, it sizes itself to fit its
-            // children horizontally, and tries to be as tall as its parent.
-            //
-            // Invoke "debug painting" (press "p" in the console, choose the
-            // "Toggle Debug Paint" action from the Flutter Inspector in Android
-            // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-            // to see the wireframe for each widget.
-            //
-            // Column has various properties to control how it sizes itself and
-            // how it positions its children. Here we use mainAxisAlignment to
-            // center the children vertically; the main axis here is the vertical
-            // axis because Columns are vertical (the cross axis would be
-            // horizontal).
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               Padding(
@@ -101,56 +99,22 @@ class _MyHomePageState extends State<MyHomePage> {
                   'Carbon Footprint in this Month',
                 ),
               ),
-              ClipOval(
-                child: Consumer<SummaryProvider>(
-                  builder: (_, summaryProvider, child) {
-                    return Container(
-                      color: Colors.green,
-                      width: 200,
-                      height: 200,
-                      child: Center(
-                        child: Stack(
-                          children: [
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: SizedBox(),
-                                ),
-                                Flexible(
-                                  flex: 3,
-                                  child: FittedBox(
-                                    fit: BoxFit.scaleDown,
-                                    child: Text(
-                                      summaryProvider.getUnitNumString(),
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .headline2!
-                                          .copyWith(color: Colors.white),
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Text(
-                                  summaryProvider.getUnitName(),
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyText1!
-                                      .copyWith(color: Colors.white),
-                                ),
-                                Expanded(
-                                  child: SizedBox(),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ),
+              EarthItem(),
+              Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        Text("total Distance travelled"),
+                        Text("10 km")
+                      ],
+                    ),
+                  ),
+                  Text("total Eletricity Consumed"),
+                  Text("total House Consumed")
+                ],
+              )
             ],
           ),
         ),
@@ -165,7 +129,76 @@ class _MyHomePageState extends State<MyHomePage> {
         },
         tooltip: 'Increment',
         child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
+
+// This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+}
+
+class EarthItem extends StatelessWidget {
+  const EarthItem({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipOval(
+      child: Consumer<SummaryProvider>(
+        builder: (_, summaryProvider, child) {
+          return Container(
+            width: 200,
+            height: 200,
+            child: Center(
+              child: Stack(
+                children: [
+                  AnimatedContainer(
+                    duration: Duration(milliseconds: 500),
+                    color: summaryProvider.footPrintCurrentMonth > 100
+                        ? Colors.yellow[400]
+                        : Colors.green,
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: SizedBox(),
+                      ),
+                      Flexible(
+                        flex: 3,
+                        child: Center(
+                          child: FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: Text(
+                              summaryProvider.getUnitNumString(),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline2!
+                                  .copyWith(color: Colors.white),
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        summaryProvider.getUnitName(),
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyText1!
+                            .copyWith(color: Colors.white, fontSize: 20),
+                      ),
+                      Expanded(
+                        child: SizedBox(),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      ),
     );
   }
 }
