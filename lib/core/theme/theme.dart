@@ -53,11 +53,17 @@ abstract class ThemeBuilder {
         bottomNavigationBarTheme: BottomNavigationBarThemeData(
             backgroundColor: Colors.transparent,
             selectedIconTheme: IconThemeData(color: Colors.green[700]),
-            selectedItemColor: Colors.green[700]));
+            selectedItemColor: Colors.green[700]),
+        sliderTheme: SliderThemeData(
+            thumbColor: Colors.white,
+            overlayColor: Colors.transparent,
+            activeTrackColor: Colors.white,
+            inactiveTrackColor: Colors.grey));
   }
 
   static ThemeData darkTheme(bool isDarkMode, int themeColorIndex) {
     return lightTheme(isDarkMode, themeColorIndex).copyWith(
+        brightness: Brightness.dark,
         primaryColor: Colors.grey[800],
         primaryColorDark: Colors.white,
         dialogTheme: DialogTheme(backgroundColor: Colors.grey[800]),
@@ -65,7 +71,7 @@ abstract class ThemeBuilder {
         appBarTheme: AppBarTheme(
             color: Colors.transparent,
             brightness: Brightness.dark,
-            titleTextStyle: TextStyle(color: Colors.grey[200])),
+            titleTextStyle: TextStyle(color: Colors.green[300])),
         textTheme: TextTheme(
           headline1: TextStyle(
               fontSize: 72.0,
@@ -84,6 +90,12 @@ abstract class ThemeBuilder {
               fontFamily: 'Hind',
               color: Color.fromRGBO(220, 220, 220, 1)),
         ),
+        bottomNavigationBarTheme: BottomNavigationBarThemeData(
+            backgroundColor: Colors.transparent,
+            unselectedIconTheme: IconThemeData(color: Colors.grey[200]),
+            unselectedItemColor: Colors.grey[200],
+            selectedIconTheme: IconThemeData(color: Colors.green[400]),
+            selectedItemColor: Colors.green[400]),
         dividerTheme: DividerThemeData(
             color: Colors.grey[600], indent: 15, endIndent: 15, space: 0),
         iconTheme: IconThemeData(color: Colors.white),

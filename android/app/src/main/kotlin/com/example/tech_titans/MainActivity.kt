@@ -15,7 +15,7 @@ class MainActivity: FlutterActivity() {
         val default_channel_id = getString(R.string.default_channel_id)
         val name = "Podcast App"
         val descriptionText = "This is default channel"
-        val importance = NotificationManager.IMPORTANCE_DEFAULT
+        val importance = NotificationManager.IMPORTANCE_HIGH
         val mChannel = NotificationChannel(default_channel_id, name, importance)
         mChannel.description = descriptionText
         val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager

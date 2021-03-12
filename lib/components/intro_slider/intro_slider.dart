@@ -26,10 +26,11 @@ class IntroPage extends HookWidget {
         backgroundColor: Colors.transparent,
         toolbarHeight: 50,
         elevation: 0,
-        brightness: Brightness.light,
+        brightness: Theme.of(context).brightness,
         centerTitle: true,
-        title:
-            Text("Monthly Survey", style: TextStyle(color: Colors.grey[800])),
+        title: Text("Monthly Survey",
+            style: TextStyle(
+                color: Theme.of(context).primaryColorDark.withOpacity(0.8))),
       ),
       body: Container(
         child: Stack(
@@ -42,7 +43,10 @@ class IntroPage extends HookWidget {
                 width: MediaQuery.of(context).size.width + 5 * 50.0,
                 child: ColorFiltered(
                   colorFilter: ColorFilter.mode(
-                      Color.fromRGBO(255, 255, 255, 0.3), BlendMode.colorDodge),
+                      Theme.of(context).primaryColor.withOpacity(0.7),
+                      Theme.of(context).brightness == Brightness.light
+                          ? BlendMode.lighten
+                          : BlendMode.darken),
                   child: FadeInImage(
                     placeholder: MemoryImage(TransparentImage.tranparentImage),
                     image: const AssetImage("assets/images/city.jpg"),
@@ -99,12 +103,37 @@ class IntroPage extends HookWidget {
                                   BorderRadius.all(Radius.circular(80)))),
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10),
-                        child: Text("Skip this time",
+                        child: Text("SUBMIT",
                             style: GoogleFonts.sourceSansPro(
                                 color: Colors.grey[600],
                                 letterSpacing: 1,
                                 fontSize: 24,
                                 fontWeight: FontWeight.w400,
+                                shadows: [
+                                  Shadow(
+                                    offset: Offset(2, 2),
+                                    blurRadius: 10.0,
+                                    color:
+                                        const Color.fromARGB(20, 20, 20, 255),
+                                  ),
+                                ])),
+                      )),
+                  TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      style: TextButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(80)))),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: Text("Skip All",
+                            style: GoogleFonts.sourceSansPro(
+                                color: Colors.white,
+                                letterSpacing: 1,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w300,
                                 shadows: [
                                   Shadow(
                                     offset: Offset(2, 2),
