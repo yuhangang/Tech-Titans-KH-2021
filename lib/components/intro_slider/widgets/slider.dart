@@ -5,14 +5,17 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:tech_titans/components/intro_slider/widgets/slider_item.dart';
 
 class IntroSlider extends HookWidget {
-  IntroSlider({
-    required PageController pageController,
-    required this.onPageChanged2,
-  }) : _pageController = pageController;
+  IntroSlider(
+      {required PageController pageController,
+      required this.onPageChanged2,
+      required GlobalKey<SliderItemState> sliderKey1,
+      required GlobalKey<SliderItem2State> sliderKey2})
+      : _pageController = pageController,
+        widgets = [SliderItem1(key: sliderKey1), SliderItem2(key: sliderKey2)];
 
   final PageController _pageController;
   final Function onPageChanged2;
-  final List<Widget> widgets = [SliderItem1()];
+  final List<Widget> widgets;
 
   @override
   Widget build(BuildContext context) {
@@ -21,11 +24,12 @@ class IntroSlider extends HookWidget {
       opacity.value = 1;
     });
     return PageView.builder(
-        itemCount: 5,
+        physics: NeverScrollableScrollPhysics(),
+        itemCount: 2,
         controller: _pageController,
         onPageChanged: onPageChanged2 as void Function(int)?,
         itemBuilder: (_, index) {
-          return widgets[0];
+          return widgets[index];
         });
   }
 }
@@ -36,12 +40,15 @@ class SliderItem1 extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _SliderItemState createState() => _SliderItemState();
+  SliderItemState createState() => SliderItemState();
 }
 
-class _SliderItemState extends State<SliderItem1> {
+class SliderItemState extends State<SliderItem1>
+    with AutomaticKeepAliveClientMixin {
   double sliderElectric = 0;
-  double sliderGasoline = 0;
+
+  @override
+  bool get wantKeepAlive => true;
 
   @override
   Widget build(BuildContext context) {
@@ -52,17 +59,17 @@ class _SliderItemState extends State<SliderItem1> {
     final TextStyle valueStyle = Theme.of(context)
         .textTheme
         .bodyText1!
-        .copyWith(fontSize: 18, fontWeight: FontWeight.w300);
+        .copyWith(fontSize: 18, fontWeight: FontWeight.w400);
     return SafeArea(
       child: Container(
           color: Colors.transparent,
           child: Stack(
             children: [
               Align(
-                  alignment: Alignment.topCenter,
+                  alignment: Alignment.center,
                   child: Padding(
                     padding:
-                        const EdgeInsets.only(top: 50, left: 20, right: 20),
+                        const EdgeInsets.only(top: 200, left: 20, right: 20),
                     child: Column(
                       children: [
                         Column(
@@ -77,7 +84,7 @@ class _SliderItemState extends State<SliderItem1> {
                               children: [
                                 Slider(
                                     value: sliderElectric,
-                                    max: 500,
+                                    max: 1000,
                                     onChanged: (_) {
                                       setState(() {
                                         sliderElectric = _;
@@ -91,9 +98,52 @@ class _SliderItemState extends State<SliderItem1> {
                             )
                           ],
                         ),
-                        SizedBox(
-                          height: 40,
-                        ),
+                      ],
+                    ),
+                  ))
+            ],
+          )),
+    );
+  }
+}
+
+class SliderItem2 extends StatefulWidget {
+  const SliderItem2({
+    Key? key,
+  }) : super(key: key);
+  @override
+  SliderItem2State createState() => SliderItem2State();
+}
+
+class SliderItem2State extends State<SliderItem2>
+    with AutomaticKeepAliveClientMixin {
+  double sliderGasoline = 0;
+
+  @override
+  bool get wantKeepAlive => true;
+
+  @override
+  Widget build(BuildContext context) {
+    final TextStyle topicStyle = Theme.of(context)
+        .textTheme
+        .headline5!
+        .copyWith(fontWeight: FontWeight.w500);
+    final TextStyle valueStyle = Theme.of(context)
+        .textTheme
+        .bodyText1!
+        .copyWith(fontSize: 18, fontWeight: FontWeight.w400);
+    return SafeArea(
+      child: Container(
+          color: Colors.transparent,
+          child: Stack(
+            children: [
+              Align(
+                  alignment: Alignment.center,
+                  child: Padding(
+                    padding:
+                        const EdgeInsets.only(top: 200, left: 20, right: 20),
+                    child: Column(
+                      children: [
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -106,7 +156,7 @@ class _SliderItemState extends State<SliderItem1> {
                               children: [
                                 Slider(
                                     value: sliderGasoline,
-                                    max: 500,
+                                    max: 1000,
                                     onChanged: (_) {
                                       setState(() {
                                         sliderGasoline = _;
@@ -125,15 +175,6 @@ class _SliderItemState extends State<SliderItem1> {
                   ))
             ],
           )),
-    );
-  }
-}
-
-class SliderItem2 extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [],
     );
   }
 }

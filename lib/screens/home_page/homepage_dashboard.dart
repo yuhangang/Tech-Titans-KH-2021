@@ -33,30 +33,37 @@ class DashBoard extends StatelessWidget {
                           .headline5!
                           .copyWith(fontSize: 20),
                     ))),
-            DataTable(
-                headingRowHeight: 10,
-                dataTextStyle: Theme.of(context)
-                    .textTheme
-                    .bodyText1!
-                    .copyWith(fontWeight: FontWeight.w500, fontSize: 16),
-                columns: [
-                  DataColumn(label: SizedBox()),
-                  DataColumn(label: SizedBox(), numeric: true),
-                ],
-                rows: [
-                  DataRow(cells: [
-                    DataCell(Text("Transport")),
-                    DataCell(Text("53 %"))
-                  ]),
-                  DataRow(cells: [
-                    DataCell(Text("Electricity")),
-                    DataCell(Text("32 %")),
-                  ]),
-                  DataRow(cells: [
-                    DataCell(Text("Food & Groceries")),
-                    DataCell(Text("15 %")),
-                  ]),
-                ]),
+            Consumer<SummaryProvider>(
+              builder: (_, summaryProvider, child) {
+                return DataTable(
+                    headingRowHeight: 10,
+                    dataTextStyle: Theme.of(context)
+                        .textTheme
+                        .bodyText1!
+                        .copyWith(fontWeight: FontWeight.w500, fontSize: 16),
+                    columns: [
+                      DataColumn(label: SizedBox()),
+                      DataColumn(label: SizedBox(), numeric: true),
+                    ],
+                    rows: [
+                      DataRow(cells: [
+                        DataCell(Text("Transport")),
+                        DataCell(Text(
+                            "${summaryProvider.tPercent.toStringAsFixed(1)} %"))
+                      ]),
+                      DataRow(cells: [
+                        DataCell(Text("Electricity")),
+                        DataCell(Text(
+                            "${summaryProvider.ePercent.toStringAsFixed(1)} %")),
+                      ]),
+                      DataRow(cells: [
+                        DataCell(Text("Food & Groceries")),
+                        DataCell(Text(
+                            "${summaryProvider.fPercent.toStringAsFixed(1)} %")),
+                      ]),
+                    ]);
+              },
+            ),
           ],
         ),
       ),
@@ -90,6 +97,12 @@ class _EarthItemState extends State<EarthItem>
   void didChangeDependencies() {
     precacheImage(earthImage.image, context);
     super.didChangeDependencies();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 
   @override
@@ -132,7 +145,9 @@ class _EarthItemState extends State<EarthItem>
                           style: Theme.of(context)
                               .textTheme
                               .headline5!
-                              .copyWith(fontSize: 25),
+                              .copyWith(
+                                  fontSize: 25,
+                                  color: Theme.of(context).primaryColorDark),
                         ),
                         Text("2")
                       ],
@@ -142,9 +157,13 @@ class _EarthItemState extends State<EarthItem>
                     child: AnimatedContainer(
                       duration: Duration(milliseconds: 2000),
                       decoration: BoxDecoration(
-                          color: (summaryProvider.footPrintCurrentMonth > 100
-                                  ? Color(0xFFC78800)
-                                  : Colors.green[600])!
+                          color: (summaryProvider.footPrintCurrentMonth > 500
+                                  ? summaryProvider.footPrintCurrentMonth > 1500
+                                      ? Color(0xFFA33C00)
+                                      : Color(0xFFC78800)
+                                  : summaryProvider.footPrintCurrentMonth > 100
+                                      ? Color(0xFFC5B800)
+                                      : Color(0xFF4EAD00))
                               .withOpacity(0.4)),
                     ),
                   ),
