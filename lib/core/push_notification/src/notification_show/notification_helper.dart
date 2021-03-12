@@ -4,6 +4,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
+import 'package:tech_titans/core/alert/alert_helper.dart';
 
 import 'package:tech_titans/core/push_notification/src/notification_show/notification_router.dart';
 import 'package:tech_titans/core/push_notification/src/notification_show/show_notification.dart';
@@ -36,12 +37,13 @@ class NotificationHelper {
       selectNotificationSubject.add(data);
   late ShowNotificationHelper showNotificationHelper;
   final AndroidNotificationChannel channel = AndroidNotificationChannel(
-      "trolley_live_consumer_1",
+      "default_channel_id",
       'High Importance Notifications', // title
       'This channel is used for important notifications.', // description
-      importance: Importance.high,
+      importance: Importance.max,
       enableVibration: true,
       playSound: true,
+      showBadge: true,
       ledColor: Colors.white);
 
   NotificationHelper() {
@@ -63,8 +65,8 @@ class NotificationHelper {
 
     selectNotificationSubject.stream.listen((String? payload) async {
       debugPrint('abcd notification payload: ${payload}');
-      NotificationNavigationHelper()
-          .navigateFromSelect(AccountPage.route, Get.key!.currentContext!);
+
+      AlertDialogHelper.showSurveyDialog();
     });
   }
   void showNotification({required String message}) {

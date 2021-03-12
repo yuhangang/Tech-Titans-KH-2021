@@ -1,5 +1,8 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tech_titans/main.dart';
 import 'package:tech_titans/providers/summary_provider.dart';
 
 class DashBoard extends StatelessWidget {
@@ -70,15 +73,27 @@ class EarthItem extends StatefulWidget {
   _EarthItemState createState() => _EarthItemState();
 }
 
-class _EarthItemState extends State<EarthItem> with TickerProviderStateMixin {
+class _EarthItemState extends State<EarthItem>
+    with TickerProviderStateMixin, AutomaticKeepAliveClientMixin {
   late AnimationController _controller;
+  late Image earthImage;
   @override
   void initState() {
+    earthImage = Image.asset('assets/images/earth.png', fit: BoxFit.fitWidth);
     _controller =
-        AnimationController(vsync: this, duration: Duration(seconds: 2))
+        AnimationController(vsync: this, duration: Duration(seconds: 35))
           ..repeat();
     super.initState();
   }
+
+  @override
+  void didChangeDependencies() {
+    precacheImage(earthImage.image, context);
+    super.didChangeDependencies();
+  }
+
+  @override
+  bool get wantKeepAlive => true;
 
   @override
   Widget build(BuildContext context) {
@@ -95,13 +110,37 @@ class _EarthItemState extends State<EarthItem> with TickerProviderStateMixin {
                 children: [
                   ClipOval(
                     child: Container(
-                      child: Image.asset('assets/images/earth.png',
-                          fit: BoxFit.fitWidth),
+                      child: AnimatedBuilder(
+                        animation: _controller,
+                        builder: (_, child) {
+                          return Transform.rotate(
+                            angle: _controller.value * 2 * pi,
+                            child: earthImage,
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.bottomRight,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Text(
+                          "CO",
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline5!
+                              .copyWith(fontSize: 25),
+                        ),
+                        Text("2")
+                      ],
                     ),
                   ),
                   ClipOval(
                     child: AnimatedContainer(
-                      duration: Duration(milliseconds: 500),
+                      duration: Duration(milliseconds: 2000),
                       decoration: BoxDecoration(
                           color: (summaryProvider.footPrintCurrentMonth > 100
                                   ? Color(0xFFC78800)

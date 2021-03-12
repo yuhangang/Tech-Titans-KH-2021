@@ -19,10 +19,10 @@ class ShowNotificationHelper {
 
   ShowNotificationHelper({this.flutterLocalNotificationsPlugin}) {}
 
-  Future<void> showNotification(message) async {
+  Future<void> showNotification(String message) async {
     int msgId = 1;
     String title = "A NEW NOTIFICATION";
-    String body = "this is body";
+    String body = message;
     String payload = "";
 
     return await _showNotificationNormal(

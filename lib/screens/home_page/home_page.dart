@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:tech_titans/components/custom_app_bar.dart';
 import 'package:tech_titans/core/alert/alert_helper.dart';
 import 'package:tech_titans/core/push_notification/src/notification_show/notification_helper.dart';
+import 'package:tech_titans/core/push_notification/src/notification_show/show_notification.dart';
 import 'package:tech_titans/providers/auth_provider.dart';
 import 'package:tech_titans/providers/summary_provider.dart';
 import 'package:tech_titans/screens/account/account_page.dart';
@@ -35,9 +36,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   void initState() {
-    Future.delayed(Duration.zero, () {
-      AlertDialogHelper.showSurveyDialog();
-    });
+    LocalNotificationHelper.showLocalNotification(
+        message: "Your Month Survey is ready");
     super.initState();
   }
 
@@ -47,11 +47,15 @@ class _MyHomePageState extends State<MyHomePage> {
 
     var children2 = [DashBoard(), Scaffold(), LeaderBoard()];
     var appTitles = ["Dashboard", "Statistics", "Leaderboard"];
+    //Future.delayed(Duration.zero, () {
+    //  AlertDialogHelper.showSurveyDialog();
+    //});
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: index,
         onTap: (_) {
+          if (_ == index) return;
           setState(() {
             if ((_ - index).abs() > 1) {
               index = _;
