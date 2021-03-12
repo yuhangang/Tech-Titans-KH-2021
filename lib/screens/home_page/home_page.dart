@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tech_titans/components/custom_app_bar.dart';
 import 'package:tech_titans/core/alert/alert_helper.dart';
+import 'package:tech_titans/core/app_preference.dart';
 import 'package:tech_titans/core/push_notification/src/notification_show/notification_helper.dart';
 import 'package:tech_titans/core/push_notification/src/notification_show/show_notification.dart';
 import 'package:tech_titans/providers/auth_provider.dart';
