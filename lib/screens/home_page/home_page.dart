@@ -13,12 +13,8 @@ import 'package:tech_titans/screens/account/account_page.dart';
 import 'package:tech_titans/screens/home_page/widgets/sphere.dart';
 
 import 'home_page_leaderboard.dart';
-<<<<<<< HEAD
-import 'home_page_me.dart';
 import 'package:tech_titans/screens/statistics/line_chart.dart';
 
-=======
->>>>>>> parent of 2e67f2d (Merge pull request #3 from agb2k/abhinav)
 import 'homepage_dashboard.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -52,13 +48,14 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
 
-<<<<<<< HEAD
-    var children2 = [DashBoard(), ConsumptionChartState(), LeaderBoard(), Me()];
+    var children2 = [
+      DashBoard(),
+      ConsumptionChart(),
+      LeaderBoard(),
+      Scaffold()
+    ];
     var appTitles = ["Dashboard", "Statistics", "Leaderboard", "Me"];
-=======
-    var children2 = [DashBoard(), Scaffold(), LeaderBoard()];
-    var appTitles = ["Dashboard", "Statistics", "Leaderboard"];
->>>>>>> parent of 2e67f2d (Merge pull request #3 from agb2k/abhinav)
+
     //Future.delayed(Duration.zero, () {
     //  AlertDialogHelper.showSurveyDialog();
     //});
