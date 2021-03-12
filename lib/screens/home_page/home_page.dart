@@ -12,6 +12,7 @@ import 'package:tech_titans/screens/account/account_page.dart';
 import 'package:tech_titans/screens/home_page/widgets/sphere.dart';
 
 import 'home_page_leaderboard.dart';
+import 'home_page_me.dart';
 import 'homepage_dashboard.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -45,8 +46,8 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
 
-    var children2 = [DashBoard(), Scaffold(), LeaderBoard()];
-    var appTitles = ["Dashboard", "Statistics", "Leaderboard"];
+    var children2 = [DashBoard(), Scaffold(), LeaderBoard(),Me()];
+    var appTitles = ["Dashboard", "Statistics", "Leaderboard", "Me"];
     //Future.delayed(Duration.zero, () {
     //  AlertDialogHelper.showSurveyDialog();
     //});
@@ -75,7 +76,9 @@ class _MyHomePageState extends State<MyHomePage> {
           BottomNavigationBarItem(
               icon: Icon(CupertinoIcons.chart_bar), label: "stat"),
           BottomNavigationBarItem(
-              icon: Icon(CupertinoIcons.globe), label: "explore")
+              icon: Icon(CupertinoIcons.globe), label: "explore"),
+          BottomNavigationBarItem(
+              icon: Icon(CupertinoIcons.person), label: "me")
         ],
       ),
       appBar: CustomAppBar(
