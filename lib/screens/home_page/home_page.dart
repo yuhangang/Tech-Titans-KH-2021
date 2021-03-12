@@ -10,6 +10,9 @@ import 'package:tech_titans/providers/summary_provider.dart';
 import 'package:tech_titans/screens/account/account_page.dart';
 import 'package:tech_titans/screens/home_page/widgets/sphere.dart';
 
+import 'home_page_leaderboard.dart';
+import 'homepage_dashboard.dart';
+
 class MyHomePage extends StatefulWidget {
   static const route = "/my-home-page";
 
@@ -27,33 +30,40 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  int index = 0;
+  PageController pageController = new PageController();
 
-  void _incrementCounter() {
-    setState(() {
-      LocalNotificationHelper.showLocalNotification(message: "true");
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
+  @override
+  void initState() {
+    Future.delayed(Duration.zero, () {
+      AlertDialogHelper.showSurveyDialog();
     });
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
-    //Future.delayed(Duration.zero, () => AlertDialogHelper.showMonthlyDialog());
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
+
+    var children2 = [DashBoard(), Scaffold(), LeaderBoard()];
+    var appTitles = ["Dashboard", "Statistics", "Leaderboard"];
     return Scaffold(
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.transparent,
+        currentIndex: index,
+        onTap: (_) {
+          setState(() {
+            if ((_ - index).abs() > 1) {
+              index = _;
+              pageController.jumpToPage(_);
+            } else {
+              index = _;
+              pageController.animateToPage(_,
+                  duration: const Duration(milliseconds: 200),
+                  curve: Curves.easeOut);
+            }
+          });
+        },
         elevation: 0,
         items: [
           BottomNavigationBarItem(
@@ -65,8 +75,8 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
       appBar: CustomAppBar(
-        title: "HOME",
-        leading: Container(),
+        title: appTitles[index],
+        showLeading: false,
         actions: [
           IconButton(
               icon: Icon(
@@ -86,38 +96,16 @@ class _MyHomePageState extends State<MyHomePage> {
               })
         ],
       ),
-      body: Center(
-        child: Container(
-          width: screenWidth,
-          height: screenWidth,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.all(20),
-                child: Text(
-                  'Carbon Footprint in this Month',
-                ),
-              ),
-              EarthItem(),
-              Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      children: [
-                        Text("total Distance travelled"),
-                        Text("10 km")
-                      ],
-                    ),
-                  ),
-                  Text("total Eletricity Consumed"),
-                  Text("total House Consumed")
-                ],
-              )
-            ],
-          ),
-        ),
+      body: PageView(
+        controller: pageController,
+        onPageChanged: (_) {
+          if (_ != index) {
+            setState(() {
+              index = _;
+            });
+          }
+        },
+        children: children2,
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -132,73 +120,6 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
 
 // This trailing comma makes auto-formatting nicer for build methods.
-    );
-  }
-}
-
-class EarthItem extends StatelessWidget {
-  const EarthItem({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return ClipOval(
-      child: Consumer<SummaryProvider>(
-        builder: (_, summaryProvider, child) {
-          return Container(
-            width: 200,
-            height: 200,
-            child: Center(
-              child: Stack(
-                children: [
-                  AnimatedContainer(
-                    duration: Duration(milliseconds: 500),
-                    color: summaryProvider.footPrintCurrentMonth > 100
-                        ? Colors.yellow[400]
-                        : Colors.green,
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: SizedBox(),
-                      ),
-                      Flexible(
-                        flex: 3,
-                        child: Center(
-                          child: FittedBox(
-                            fit: BoxFit.scaleDown,
-                            child: Text(
-                              summaryProvider.getUnitNumString(),
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headline2!
-                                  .copyWith(color: Colors.white),
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Text(
-                        summaryProvider.getUnitName(),
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyText1!
-                            .copyWith(color: Colors.white, fontSize: 20),
-                      ),
-                      Expanded(
-                        child: SizedBox(),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          );
-        },
-      ),
     );
   }
 }

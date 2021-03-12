@@ -3,8 +3,8 @@ import 'package:tech_titans/core/theme/noSplashFactory.dart';
 
 abstract class ThemeBuilder {
   static const colorThemeList = [
-    //Color(0xFFd8d8d8),
-    Color(0xFFEAE7E2),
+    Color(0xFFD8CDB4),
+    //Color(0xFFEAE7E2),
     //Color(0xFFb0bec5),
     //Color(0xFFFFFFFF),
     //Color(0xFFFCFCFC)
@@ -33,7 +33,8 @@ abstract class ThemeBuilder {
         appBarTheme: AppBarTheme(
             backgroundColor: Colors.transparent,
             brightness: Brightness.light,
-            titleTextStyle: TextStyle(color: Colors.grey[800])),
+            titleTextStyle:
+                TextStyle(color: Colors.lightGreen[800], fontSize: 25)),
         scaffoldBackgroundColor: colorThemeList[themeColorIndex],
         textButtonTheme: TextButtonThemeData(
             style: ButtonStyle(
@@ -50,16 +51,17 @@ abstract class ThemeBuilder {
           TargetPlatform.android: CupertinoPageTransitionsBuilder(),
         }),
         bottomNavigationBarTheme: BottomNavigationBarThemeData(
-            selectedIconTheme: IconThemeData(color: Colors.lightGreen),
-            selectedItemColor: Colors.lightGreen));
+            backgroundColor: Colors.transparent,
+            selectedIconTheme: IconThemeData(color: Colors.green[700]),
+            selectedItemColor: Colors.green[700]));
   }
 
   static ThemeData darkTheme(bool isDarkMode, int themeColorIndex) {
     return lightTheme(isDarkMode, themeColorIndex).copyWith(
         primaryColor: Colors.grey[800],
         primaryColorDark: Colors.white,
-        scaffoldBackgroundColor: Color.fromRGBO(20, 20, 20, 1),
         dialogTheme: DialogTheme(backgroundColor: Colors.grey[800]),
+        scaffoldBackgroundColor: Color(0xFF24414E),
         appBarTheme: AppBarTheme(
             color: Colors.transparent,
             brightness: Brightness.dark,
