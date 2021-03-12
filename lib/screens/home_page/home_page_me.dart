@@ -46,44 +46,30 @@ class Me extends StatelessWidget {
                 rows: [
                   DataRow(cells: [
                     DataCell(Text("Health:")),
-                    DataCell(
-                      Center(
+                    DataCell(Center(
                         child: FAProgressBar(
-                          size: 200,
-                          direction: Axis.horizontal,
-                          currentValue: 80,
-                          progressColor: Colors.green
-                          )
-                        ) 
-                      )
+                            size: 200,
+                            direction: Axis.horizontal,
+                            currentValue: 80,
+                            progressColor: Colors.green)))
                   ]),
                   DataRow(cells: [
                     DataCell(Text("Attack:")),
-                    DataCell(
-                      Center(
+                    DataCell(Center(
                         child: FAProgressBar(
-                          size: 200,
-                          direction: Axis.horizontal,
-                          currentValue: 60,
-                          progressColor: Colors.red
-
-                          )
-                        ) 
-                      )
+                            size: 200,
+                            direction: Axis.horizontal,
+                            currentValue: 60,
+                            progressColor: Colors.red)))
                   ]),
                   DataRow(cells: [
                     DataCell(Text("Intelligence:")),
-                    DataCell(
-                      Center(
+                    DataCell(Center(
                         child: FAProgressBar(
-                          size: 200,
-                          direction: Axis.horizontal,
-                          currentValue: 40,
-                          
-                          progressColor: Colors.blue
-                          )
-                        ) 
-                      )
+                            size: 200,
+                            direction: Axis.horizontal,
+                            currentValue: 40,
+                            progressColor: Colors.blue)))
                   ]),
                 ]),
           ],
@@ -110,7 +96,7 @@ class _CharacterItemState extends State<CharacterItem>
   void initState() {
     boyImage = Image.asset('assets/images/boy.png', fit: BoxFit.contain);
     _controller =
-        AnimationController(vsync: this)
+        AnimationController(duration: Duration(milliseconds: 500), vsync: this)
           ..repeat();
     super.initState();
   }
@@ -123,7 +109,7 @@ class _CharacterItemState extends State<CharacterItem>
 
   @override
   bool get wantKeepAlive => true;
-  
+
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -137,20 +123,20 @@ class _CharacterItemState extends State<CharacterItem>
             child: Center(
               child: Stack(
                 children: [
-                    Container(
-                      alignment: Alignment(-0.6,0),
-                      child: AnimatedBuilder(
-                        animation: _controller,
-                        builder: (_, child) {
-                          return Transform.rotate(
-                            angle: 0.1,
-                            child: boyImage,
-                          );
-                        },
-                      ),
-                    ),
                   Container(
-                    alignment: Alignment(0.0,1.4),
+                    alignment: Alignment(-0.6, 0),
+                    child: AnimatedBuilder(
+                      animation: _controller,
+                      builder: (_, child) {
+                        return Transform.rotate(
+                          angle: 0.1,
+                          child: boyImage,
+                        );
+                      },
+                    ),
+                  ),
+                  Container(
+                    alignment: Alignment(0.0, 1.4),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.end,

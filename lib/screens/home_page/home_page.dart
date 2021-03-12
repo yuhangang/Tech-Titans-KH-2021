@@ -4,18 +4,18 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tech_titans/components/custom_app_bar.dart';
 import 'package:tech_titans/core/alert/alert_helper.dart';
+import 'package:tech_titans/core/app_preference.dart';
 import 'package:tech_titans/core/push_notification/src/notification_show/notification_helper.dart';
 import 'package:tech_titans/core/push_notification/src/notification_show/show_notification.dart';
 import 'package:tech_titans/providers/auth_provider.dart';
 import 'package:tech_titans/providers/summary_provider.dart';
 import 'package:tech_titans/screens/account/account_page.dart';
+import 'package:tech_titans/screens/home_page/home_page_me.dart';
 import 'package:tech_titans/screens/home_page/widgets/sphere.dart';
 import 'package:tech_titans/screens/statistics/line_chart.dart';
 
 import 'home_page_leaderboard.dart';
 import 'home_page_me.dart';
-
-import 'package:tech_titans/screens/statistics/line_chart.dart';
 
 import 'homepage_dashboard.dart';
 
@@ -52,6 +52,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     var children2 = [DashBoard(), ConsumptionChart(), LeaderBoard(), Me()];
     var appTitles = ["Dashboard", "Statistics", "Leaderboard", "Me"];
+
     //Future.delayed(Duration.zero, () {
     //  AlertDialogHelper.showSurveyDialog();
     //});

@@ -40,7 +40,7 @@ class UserTable extends StatelessWidget {
             child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  "Year Reductions",
+                  "Yearly Reductions",
                   style: Theme.of(context)
                       .textTheme
                       .headline5!
@@ -60,6 +60,8 @@ class UserTable extends StatelessWidget {
             ],
             rows: [
               DataRow(
+                  color: MaterialStateProperty.all<Color>(
+                      Colors.lightGreen.withOpacity(0.2)),
                   onSelectChanged: (_) {
                     AlertDialogHelper.showLeaderDialog();
                   },
@@ -75,7 +77,7 @@ class UserTable extends StatelessWidget {
               ]),
               DataRow(cells: [
                 DataCell(Text("3")),
-                DataCell(Text("Food & Groceries")),
+                DataCell(Text("YOLO")),
                 DataCell(Text("93.7 %")),
               ]),
             ]),
@@ -95,7 +97,7 @@ class CountryTable extends StatelessWidget {
             child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  "Avg Reduction by Countries",
+                  "Avg Yearly Reduction by Countries",
                   style: Theme.of(context)
                       .textTheme
                       .headline5!
@@ -114,17 +116,29 @@ class CountryTable extends StatelessWidget {
             ],
             rows: [
               DataRow(cells: [
-                DataCell(Text("1")),
+                DataCell(SizedBox(
+                    height: 30,
+                    width: 30,
+                    child:
+                        ClipOval(child: Image.asset('assets/images/my.png')))),
                 DataCell(Text("Malaysia")),
                 DataCell(Text("24.6 %"))
               ]),
               DataRow(cells: [
-                DataCell(Text("2")),
+                DataCell(SizedBox(
+                    height: 30,
+                    width: 30,
+                    child:
+                        ClipOval(child: Image.asset('assets/images/sg.png')))),
                 DataCell(Text("Singapore")),
                 DataCell(Text("18.0 %")),
               ]),
               DataRow(cells: [
-                DataCell(Text("3")),
+                DataCell(SizedBox(
+                    height: 30,
+                    width: 30,
+                    child:
+                        ClipOval(child: Image.asset('assets/images/id.png')))),
                 DataCell(Text("Indonesia")),
                 DataCell(Text("15.7 %")),
               ]),

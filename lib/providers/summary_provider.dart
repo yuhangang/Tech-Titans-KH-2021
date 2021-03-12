@@ -19,7 +19,7 @@ const monthList = [
 
 class SummaryProvider extends ChangeNotifier {
   List<Record> oldRecord = [];
-  double _footPrintCurrentMonth = 20;
+  double _footPrintCurrentMonth = 0;
   int month = 0;
   double transportSum = 0;
   double electricitySum = 0;

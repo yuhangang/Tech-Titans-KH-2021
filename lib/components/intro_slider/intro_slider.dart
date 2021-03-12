@@ -43,9 +43,10 @@ class IntroPage extends HookWidget {
             AnimatedPositioned(
               left: 0 - index.value * 100,
               curve: Curves.easeOutExpo,
-              duration: const Duration(milliseconds: 2000),
+              duration: const Duration(milliseconds: 3000),
               child: Container(
                 width: MediaQuery.of(context).size.width + 2 * 100.0,
+                color: Theme.of(context).primaryColor,
                 child: ColorFiltered(
                   colorFilter: ColorFilter.mode(
                       Colors.white.withOpacity(0.7),
