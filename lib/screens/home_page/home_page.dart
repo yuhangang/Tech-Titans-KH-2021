@@ -10,6 +10,7 @@ import 'package:tech_titans/core/push_notification/src/notification_show/show_no
 import 'package:tech_titans/providers/auth_provider.dart';
 import 'package:tech_titans/providers/summary_provider.dart';
 import 'package:tech_titans/screens/account/account_page.dart';
+import 'package:tech_titans/screens/home_page/home_page_me.dart';
 import 'package:tech_titans/screens/home_page/widgets/sphere.dart';
 
 import 'home_page_leaderboard.dart';
@@ -48,12 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
 
-    var children2 = [
-      DashBoard(),
-      ConsumptionChart(),
-      LeaderBoard(),
-      Scaffold()
-    ];
+    var children2 = [DashBoard(), ConsumptionChart(), LeaderBoard(), Me()];
     var appTitles = ["Dashboard", "Statistics", "Leaderboard", "Me"];
 
     //Future.delayed(Duration.zero, () {
@@ -84,7 +80,9 @@ class _MyHomePageState extends State<MyHomePage> {
           BottomNavigationBarItem(
               icon: Icon(CupertinoIcons.chart_bar), label: "stat"),
           BottomNavigationBarItem(
-              icon: Icon(CupertinoIcons.globe), label: "explore")
+              icon: Icon(CupertinoIcons.globe), label: "explore"),
+          BottomNavigationBarItem(
+              icon: Icon(CupertinoIcons.person), label: "me")
         ],
       ),
       appBar: CustomAppBar(
