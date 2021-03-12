@@ -43,6 +43,8 @@ abstract class ThemeBuilder {
                     TextStyle(color: Colors.white)))),
         textTheme: TextTheme(
           headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
+          headline5:
+              TextStyle(color: Colors.brown[700], fontWeight: FontWeight.w500),
           headline6: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
           bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
         ),
@@ -63,6 +65,7 @@ abstract class ThemeBuilder {
 
   static ThemeData darkTheme(bool isDarkMode, int themeColorIndex) {
     return lightTheme(isDarkMode, themeColorIndex).copyWith(
+        canvasColor: Colors.blueAccent[800],
         brightness: Brightness.dark,
         primaryColor: Colors.grey[800],
         primaryColorDark: Colors.white,
@@ -71,12 +74,15 @@ abstract class ThemeBuilder {
         appBarTheme: AppBarTheme(
             color: Colors.transparent,
             brightness: Brightness.dark,
-            titleTextStyle: TextStyle(color: Colors.green[300])),
+            titleTextStyle: TextStyle(color: Colors.green[300], fontSize: 25)),
         textTheme: TextTheme(
           headline1: TextStyle(
               fontSize: 72.0,
               fontWeight: FontWeight.bold,
               color: Color.fromRGBO(220, 220, 220, 1)),
+          headline5: TextStyle(
+              color: Color.fromRGBO(200, 200, 255, 1),
+              fontWeight: FontWeight.w500),
           headline6: TextStyle(
               fontSize: 36.0,
               fontStyle: FontStyle.italic,
@@ -99,6 +105,11 @@ abstract class ThemeBuilder {
         dividerTheme: DividerThemeData(
             color: Colors.grey[600], indent: 15, endIndent: 15, space: 0),
         iconTheme: IconThemeData(color: Colors.white),
+        sliderTheme: SliderThemeData(
+            thumbColor: Colors.grey[400],
+            overlayColor: Colors.transparent,
+            activeTrackColor: Colors.blueGrey[500],
+            inactiveTrackColor: Colors.grey[400]),
         textButtonTheme: TextButtonThemeData(
           style: ButtonStyle(
               foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
