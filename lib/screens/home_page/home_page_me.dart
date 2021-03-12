@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tech_titans/main.dart';
 import 'package:tech_titans/providers/summary_provider.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
 
 class Me extends StatelessWidget {
   const Me({
@@ -13,7 +15,7 @@ class Me extends StatelessWidget {
     return SingleChildScrollView(
       child: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             CharacterItem(),
@@ -38,29 +40,50 @@ class Me extends StatelessWidget {
                     .bodyText1!
                     .copyWith(fontWeight: FontWeight.w500, fontSize: 16),
                 columns: [
-                  DataColumn(label: SizedBox()),
-                  DataColumn(label: SizedBox(), numeric: true),
+                  DataColumn(label: SizedBox(width: 0)),
+                  DataColumn(label: SizedBox(width: 200)),
                 ],
                 rows: [
                   DataRow(cells: [
                     DataCell(Text("Health:")),
-                    DataCell(Text("77%"))
-                  ]),
-                  DataRow(cells: [
-                    DataCell(Text("Speed:")),
-                    DataCell(Text("42%")),
+                    DataCell(
+                      Center(
+                        child: FAProgressBar(
+                          size: 200,
+                          direction: Axis.horizontal,
+                          currentValue: 80,
+                          progressColor: Colors.green
+                          )
+                        ) 
+                      )
                   ]),
                   DataRow(cells: [
                     DataCell(Text("Attack:")),
-                    DataCell(Text("33%")),
+                    DataCell(
+                      Center(
+                        child: FAProgressBar(
+                          size: 200,
+                          direction: Axis.horizontal,
+                          currentValue: 60,
+                          progressColor: Colors.red
+
+                          )
+                        ) 
+                      )
                   ]),
                   DataRow(cells: [
                     DataCell(Text("Intelligence:")),
-                    DataCell(Text("15%")),
-                  ]),
-                  DataRow(cells: [
-                    DataCell(Text("Stealth:")),
-                    DataCell(Text("15%")),
+                    DataCell(
+                      Center(
+                        child: FAProgressBar(
+                          size: 200,
+                          direction: Axis.horizontal,
+                          currentValue: 40,
+                          
+                          progressColor: Colors.blue
+                          )
+                        ) 
+                      )
                   ]),
                 ]),
           ],
@@ -126,8 +149,8 @@ class _CharacterItemState extends State<CharacterItem>
                         },
                       ),
                     ),
-                  Align(
-                    alignment: Alignment.bottomCenter,
+                  Container(
+                    alignment: Alignment(0.0,1.4),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.end,
