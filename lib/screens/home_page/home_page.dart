@@ -82,16 +82,17 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
       appBar: CustomAppBar(
-        title: appTitles[index],
+        title: index == 0 ? "${appTitles[index]}" : appTitles[index],
         showLeading: false,
         actions: [
           IconButton(
               icon: Icon(
-                Icons.logout,
+                CupertinoIcons.clock,
                 color: Theme.of(context).iconTheme.color,
               ),
               onPressed: () {
-                Provider.of<AuthProvider>(context, listen: false).logout();
+                LocalNotificationHelper.showLocalNotification(
+                    message: "Your Month Survey is ready");
               }),
           IconButton(
               icon: Icon(
@@ -100,7 +101,16 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               onPressed: () {
                 Navigator.pushNamed(context, AccountPage.route);
-              })
+              }),
+          IconButton(
+              icon: Icon(
+                Icons.logout,
+                color: Theme.of(context).iconTheme.color,
+              ),
+              onPressed: () {
+                Provider.of<SummaryProvider>(context, listen: false).reset();
+                Provider.of<AuthProvider>(context, listen: false).logout();
+              }),
         ],
       ),
       body: PageView(
@@ -120,7 +130,7 @@ class _MyHomePageState extends State<MyHomePage> {
               .setfootPrintCurrentMonth(
                   Provider.of<SummaryProvider>(context, listen: false)
                           .footPrintCurrentMonth +
-                      1000);
+                      100);
         },
         tooltip: 'Increment',
         child: Icon(Icons.add),

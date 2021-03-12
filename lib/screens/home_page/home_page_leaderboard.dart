@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tech_titans/core/alert/alert_helper.dart';
 
 class LeaderBoard extends StatelessWidget {
   const LeaderBoard({
@@ -46,6 +47,7 @@ class UserTable extends StatelessWidget {
                       .copyWith(fontSize: 20),
                 ))),
         DataTable(
+            showCheckboxColumn: false,
             headingRowHeight: 10,
             dataTextStyle: Theme.of(context)
                 .textTheme
@@ -57,11 +59,15 @@ class UserTable extends StatelessWidget {
               DataColumn(label: SizedBox(), numeric: true)
             ],
             rows: [
-              DataRow(cells: [
-                DataCell(Text("1")),
-                DataCell(Text("A Anonymous Cat")),
-                DataCell(Text("95.6 %"))
-              ]),
+              DataRow(
+                  onSelectChanged: (_) {
+                    AlertDialogHelper.showLeaderDialog();
+                  },
+                  cells: [
+                    DataCell(Text("1")),
+                    DataCell(Text("A Anonymous Cat")),
+                    DataCell(Text("95.6 %"))
+                  ]),
               DataRow(cells: [
                 DataCell(Text("2")),
                 DataCell(Text("DogeCoin to the Moon")),
