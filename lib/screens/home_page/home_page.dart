@@ -48,8 +48,8 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
 
-    var children2 = [DashBoard(), ConsumptionChartState(), LeaderBoard()];
-    var appTitles = ["Dashboard", "Statistics", "Leaderboard"];
+    var children2 = [DashBoard(), ConsumptionChartState(), LeaderBoard(), Me()];
+    var appTitles = ["Dashboard", "Statistics", "Leaderboard", "Me"];
     //Future.delayed(Duration.zero, () {
     //  AlertDialogHelper.showSurveyDialog();
     //});
@@ -124,7 +124,7 @@ class _MyHomePageState extends State<MyHomePage> {
             });
           }
         },
-        //children: children2,
+        children: children2,
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
