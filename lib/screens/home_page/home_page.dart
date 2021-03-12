@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tech_titans/components/custom_app_bar.dart';
+import 'package:tech_titans/core/push_notification/src/notification_show/notification_helper.dart';
 import 'package:tech_titans/providers/auth_provider.dart';
 import 'package:tech_titans/screens/account/account_page.dart';
 
@@ -25,6 +26,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _incrementCounter() {
     setState(() {
+      LocalNotificationHelper.showLocalNotification(message: "true");
       // This call to setState tells the Flutter framework that something has
       // changed in this State, which causes it to rerun the build method below
       // so that the display can reflect the updated values. If we changed

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tech_titans/screens/account/account_page.dart';
 import 'package:tech_titans/screens/login/login_page.dart';
 
 class NotificationNavigationHelper {
@@ -6,7 +7,7 @@ class NotificationNavigationHelper {
       {String? payload}) async {
     if (payload == null) {
       switch (routeName) {
-        case LoginPage.route:
+        case AccountPage.route:
           await _handleHomePage(context);
           break;
         default:
@@ -17,6 +18,6 @@ class NotificationNavigationHelper {
   }
 
   static _handleHomePage(BuildContext context) {
-    Navigator.pushNamed(context, LoginPage.route);
+    Navigator.pushNamed(context, AccountPage.route);
   }
 }

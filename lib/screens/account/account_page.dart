@@ -9,7 +9,6 @@ class AccountPage extends StatelessWidget {
   static const route = "/account-page";
   @override
   Widget build(BuildContext context) {
-    debugPrint("rebuild!!!!");
     return Scaffold(
       appBar: CustomAppBar(
         title: "Account",

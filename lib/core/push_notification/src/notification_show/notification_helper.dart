@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 
 import 'package:tech_titans/core/push_notification/src/notification_show/notification_router.dart';
 import 'package:tech_titans/core/push_notification/src/notification_show/show_notification.dart';
+import 'package:tech_titans/screens/account/account_page.dart';
 import 'package:tech_titans/screens/login/login_page.dart';
 
 late NotificationHelper notificationHelper;
@@ -24,7 +25,7 @@ class NotificationHelper {
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
   final AndroidInitializationSettings initializationSettingsAndroid =
-      new AndroidInitializationSettings('icon_notification');
+      new AndroidInitializationSettings('icon_notif');
   late InitializationSettings initializationSettings;
 
   IOSInitializationSettings initializationSettingsIOS =
@@ -63,7 +64,7 @@ class NotificationHelper {
     selectNotificationSubject.stream.listen((String? payload) async {
       debugPrint('abcd notification payload: ${payload}');
       NotificationNavigationHelper()
-          .navigateFromSelect(LoginPage.route, Get.key!.currentContext!);
+          .navigateFromSelect(AccountPage.route, Get.key!.currentContext!);
     });
   }
   void showNotification({required String message}) {

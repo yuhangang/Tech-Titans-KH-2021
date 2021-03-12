@@ -11,7 +11,7 @@ class ShowNotificationHelper {
           color: Colors.white,
           importance: Importance.max,
           priority: Priority.high,
-          largeIcon: const DrawableResourceAndroidBitmap('ic_logo_white_t'),
+          largeIcon: const DrawableResourceAndroidBitmap('icon_notif_large'),
           ticker: 'ticker');
   final IOSNotificationDetails iOSPlatformChannelSpecifics =
       IOSNotificationDetails();
@@ -21,8 +21,8 @@ class ShowNotificationHelper {
 
   Future<void> showNotification(message) async {
     int msgId = 1;
-    String title = "";
-    String body = "";
+    String title = "A NEW NOTIFICATION";
+    String body = "this is body";
     String payload = "";
 
     return await _showNotificationNormal(
