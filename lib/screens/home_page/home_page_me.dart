@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tech_titans/main.dart';
@@ -88,6 +86,10 @@ class _CharacterItemState extends State<CharacterItem>
   @override
   void initState() {
     boyImage = Image.asset('assets/images/boy.png', fit: BoxFit.contain);
+    _controller =
+        AnimationController(vsync: this)
+          ..repeat();
+    super.initState();
   }
 
   @override
