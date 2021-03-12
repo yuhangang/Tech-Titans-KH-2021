@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:tech_titans/core/app_preference.dart';
 import 'package:tech_titans/core/push_notification/src/notification_show/notification_helper.dart';
 import 'package:tech_titans/providers/auth_provider.dart';
+import 'package:tech_titans/providers/summary_provider.dart';
 import 'package:tech_titans/providers/theme_provider.dart';
 import 'package:tech_titans/routes.dart';
 import 'package:tech_titans/screens/home_page/home_page.dart';
@@ -20,6 +21,9 @@ Future<void> main() async {
     ),
     ChangeNotifierProvider(
       create: (context) => AuthProvider(user: user),
+    ),
+    ChangeNotifierProvider(
+      create: (context) => SummaryProvider(),
     ),
   ], child: new MyApp()));
 }
