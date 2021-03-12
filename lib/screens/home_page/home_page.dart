@@ -13,6 +13,8 @@ import 'package:tech_titans/screens/home_page/widgets/sphere.dart';
 
 import 'home_page_leaderboard.dart';
 import 'home_page_me.dart';
+import 'package:tech_titans/screens/statistics/line_chart.dart';
+
 import 'homepage_dashboard.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -46,8 +48,8 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
 
-    var children2 = [DashBoard(), Scaffold(), LeaderBoard(),Me()];
-    var appTitles = ["Dashboard", "Statistics", "Leaderboard", "Me"];
+    var children2 = [DashBoard(), ConsumptionChartState(), LeaderBoard()];
+    var appTitles = ["Dashboard", "Statistics", "Leaderboard"];
     //Future.delayed(Duration.zero, () {
     //  AlertDialogHelper.showSurveyDialog();
     //});
@@ -122,7 +124,7 @@ class _MyHomePageState extends State<MyHomePage> {
             });
           }
         },
-        children: children2,
+        //children: children2,
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
