@@ -14,6 +14,9 @@ import 'package:tech_titans/screens/statistics/line_chart.dart';
 
 import 'home_page_leaderboard.dart';
 import 'home_page_me.dart';
+
+import 'package:tech_titans/screens/statistics/line_chart.dart';
+
 import 'homepage_dashboard.dart';
 
 class MyHomePage extends StatefulWidget {
