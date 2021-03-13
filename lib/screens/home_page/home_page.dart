@@ -10,14 +10,11 @@ import 'package:tech_titans/core/push_notification/src/notification_show/show_no
 import 'package:tech_titans/providers/auth_provider.dart';
 import 'package:tech_titans/providers/summary_provider.dart';
 import 'package:tech_titans/screens/account/account_page.dart';
+import 'package:tech_titans/screens/home_page/home_page_article.dart';
+import 'package:tech_titans/screens/home_page/home_page_leaderboard.dart';
 import 'package:tech_titans/screens/home_page/home_page_me.dart';
-import 'package:tech_titans/screens/home_page/widgets/sphere.dart';
+import 'package:tech_titans/screens/home_page/homepage_dashboard.dart';
 import 'package:tech_titans/screens/statistics/line_chart.dart';
-
-import 'home_page_leaderboard.dart';
-import 'home_page_me.dart';
-
-import 'homepage_dashboard.dart';
 
 class MyHomePage extends StatefulWidget {
   static const route = "/my-home-page";
@@ -48,10 +45,20 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-
-    var children2 = [DashBoard(), ConsumptionChart(), LeaderBoard(), Me()];
-    var appTitles = ["Dashboard", "Statistics", "Leaderboard", "Me"];
+    var children2 = [
+      DashBoard(),
+      ConsumptionChart(),
+      LeaderBoard(),
+      Article(),
+      Me()
+    ];
+    var appTitles = [
+      "Dashboard",
+      "Statistics",
+      "Leaderboard",
+      "Articles",
+      "Me"
+    ];
 
     //Future.delayed(Duration.zero, () {
     //  AlertDialogHelper.showSurveyDialog();
@@ -82,6 +89,8 @@ class _MyHomePageState extends State<MyHomePage> {
               icon: Icon(CupertinoIcons.chart_bar), label: "stat"),
           BottomNavigationBarItem(
               icon: Icon(CupertinoIcons.globe), label: "explore"),
+          BottomNavigationBarItem(
+              icon: Icon(CupertinoIcons.news), label: "article"),
           BottomNavigationBarItem(
               icon: Icon(CupertinoIcons.person), label: "me")
         ],
