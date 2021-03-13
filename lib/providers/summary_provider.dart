@@ -2,22 +2,22 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 
-const monthList = [
-  'Jan',
-  'Feb',
-  'Mar',
-  'Apr',
-  'May',
-  'June',
-  'Jul',
-  'Aug',
-  'Sep',
-  'Oct',
-  'Nov',
-  'Dec'
-];
-
 class SummaryProvider extends ChangeNotifier {
+  final monthList = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'June',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec'
+  ];
+
   List<Record> oldRecord = [];
   double _footPrintCurrentMonth = 0;
   int month = 0;
@@ -48,15 +48,16 @@ class SummaryProvider extends ChangeNotifier {
     tPercent = (transportSum / _footPrintCurrentMonth) * 100;
     ePercent = (electricitySum / _footPrintCurrentMonth) * 100;
     fPercent = (foodSum / _footPrintCurrentMonth) * 100;
-    oldRecord.add(new Record(
-        footPrintCurrentMonth: footPrintCurrentMonth,
-        month: month,
-        transportSum: transportSum,
-        electricitySum: electricitySum,
-        foodSum: foodSum,
-        tPercent: tPercent,
-        ePercent: ePercent,
-        fPercent: fPercent));
+    if (oldRecord.length < 12)
+      oldRecord.add(new Record(
+          footPrintCurrentMonth: footPrintCurrentMonth,
+          month: month,
+          transportSum: transportSum,
+          electricitySum: electricitySum,
+          foodSum: foodSum,
+          tPercent: tPercent,
+          ePercent: ePercent,
+          fPercent: fPercent));
     incrementMonth();
     notifyListeners();
   }

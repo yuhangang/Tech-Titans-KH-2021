@@ -89,7 +89,7 @@ class CharacterItem extends StatefulWidget {
 }
 
 class _CharacterItemState extends State<CharacterItem>
-    with TickerProviderStateMixin, AutomaticKeepAliveClientMixin {
+    with TickerProviderStateMixin {
   late AnimationController _controller;
   late Image boyImage;
   @override
@@ -106,9 +106,6 @@ class _CharacterItemState extends State<CharacterItem>
     precacheImage(boyImage.image, context);
     super.didChangeDependencies();
   }
-
-  @override
-  bool get wantKeepAlive => true;
 
   @override
   Widget build(BuildContext context) {
