@@ -4,6 +4,18 @@ import 'package:tech_titans/components/custom_app_bar.dart';
 import 'package:tech_titans/core/push_notification/src/notification_show/notification_helper.dart';
 import 'package:tech_titans/providers/auth_provider.dart';
 import 'package:tech_titans/screens/account/account_page.dart';
+<<<<<<< Updated upstream
+=======
+import 'package:tech_titans/screens/home_page/home_page_me.dart';
+import 'package:tech_titans/screens/home_page/widgets/sphere.dart';
+import 'package:tech_titans/screens/statistics/line_chart.dart';
+
+import 'home_page_leaderboard.dart';
+import 'home_page_me.dart';
+
+import 'homepage_dashboard.dart';
+import 'home_page_article.dart';
+>>>>>>> Stashed changes
 
 class MyHomePage extends StatefulWidget {
   static const route = "/my-home-page";
@@ -38,6 +50,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+<<<<<<< Updated upstream
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
@@ -45,6 +58,48 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
+=======
+    final screenWidth = MediaQuery.of(context).size.width;
+
+    var children2 = [DashBoard(), ConsumptionChart(), LeaderBoard(), Article(), Me()];
+    var appTitles = ["Dashboard", "Statistics", "Leaderboard", "Articles", "Me"];
+
+    //Future.delayed(Duration.zero, () {
+    //  AlertDialogHelper.showSurveyDialog();
+    //});
+    return Scaffold(
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: index,
+        onTap: (_) {
+          if (_ == index) return;
+          setState(() {
+            if ((_ - index).abs() > 1) {
+              index = _;
+              pageController.jumpToPage(_);
+            } else {
+              index = _;
+              pageController.animateToPage(_,
+                  duration: const Duration(milliseconds: 200),
+                  curve: Curves.easeOut);
+            }
+          });
+        },
+        elevation: 0,
+        items: [
+          BottomNavigationBarItem(
+              icon: Icon(CupertinoIcons.home), label: "dashboard"),
+          BottomNavigationBarItem(
+              icon: Icon(CupertinoIcons.chart_bar), label: "stat"),
+          BottomNavigationBarItem(
+              icon: Icon(CupertinoIcons.globe), label: "explore"),
+          BottomNavigationBarItem(
+              icon: Icon(CupertinoIcons.news), label: "article"),
+          BottomNavigationBarItem(
+              icon: Icon(CupertinoIcons.person), label: "me")
+        ],
+      ),
+>>>>>>> Stashed changes
       appBar: CustomAppBar(
         title: "HOME",
         leading: Container(),
