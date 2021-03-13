@@ -153,6 +153,29 @@ class _EarthItemState extends State<EarthItem>
                       ],
                     ),
                   ),
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Consumer<SummaryProvider>(
+                          builder: (_, summaryProvider, child) {
+                            return Text(
+                              "${summaryProvider.monthList[summaryProvider.month]}",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline5!
+                                  .copyWith(
+                                      fontSize: 25,
+                                      color:
+                                          Theme.of(context).primaryColorDark),
+                            );
+                          },
+                        )
+                      ],
+                    ),
+                  ),
                   ClipOval(
                     child: AnimatedContainer(
                       duration: Duration(milliseconds: 2000),
