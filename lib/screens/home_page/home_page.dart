@@ -1,11 +1,16 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tech_titans/components/custom_app_bar.dart';
+import 'package:tech_titans/core/alert/alert_helper.dart';
+import 'package:tech_titans/core/app_preference.dart';
 import 'package:tech_titans/core/push_notification/src/notification_show/notification_helper.dart';
+import 'package:tech_titans/core/push_notification/src/notification_show/show_notification.dart';
 import 'package:tech_titans/providers/auth_provider.dart';
+import 'package:tech_titans/providers/summary_provider.dart';
 import 'package:tech_titans/screens/account/account_page.dart';
-<<<<<<< Updated upstream
-=======
+
 import 'package:tech_titans/screens/home_page/home_page_me.dart';
 import 'package:tech_titans/screens/home_page/widgets/sphere.dart';
 import 'package:tech_titans/screens/statistics/line_chart.dart';
@@ -15,7 +20,6 @@ import 'home_page_me.dart';
 
 import 'homepage_dashboard.dart';
 import 'home_page_article.dart';
->>>>>>> Stashed changes
 
 class MyHomePage extends StatefulWidget {
   static const route = "/my-home-page";
@@ -34,23 +38,18 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  int index = 0;
+  PageController pageController = new PageController();
 
-  void _incrementCounter() {
-    setState(() {
-      LocalNotificationHelper.showLocalNotification(message: "true");
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
+  @override
+  void initState() {
+    LocalNotificationHelper.showLocalNotification(
+        message: "Your Month Survey is ready");
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-<<<<<<< Updated upstream
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
@@ -58,11 +57,19 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
-=======
     final screenWidth = MediaQuery.of(context).size.width;
 
     var children2 = [DashBoard(), ConsumptionChart(), LeaderBoard(), Article(), Me()];
     var appTitles = ["Dashboard", "Statistics", "Leaderboard", "Articles", "Me"];
+
+    //Future.delayed(Duration.zero, () {
+    //  AlertDialogHelper.showSurveyDialog();
+    //});
+    return Scaffold(
+    final screenWidth = MediaQuery.of(context).size.width;
+
+    var children2 = [DashBoard(), ConsumptionChart(), LeaderBoard(), Me()];
+    var appTitles = ["Dashboard", "Statistics", "Leaderboard", "Me"];
 
     //Future.delayed(Duration.zero, () {
     //  AlertDialogHelper.showSurveyDialog();
@@ -99,64 +106,62 @@ class _MyHomePageState extends State<MyHomePage> {
               icon: Icon(CupertinoIcons.person), label: "me")
         ],
       ),
->>>>>>> Stashed changes
       appBar: CustomAppBar(
-        title: "HOME",
-        leading: Container(),
+        title: index == 0 ? "${appTitles[index]}" : appTitles[index],
+        showLeading: false,
         actions: [
+          IconButton(
+              icon: Icon(
+                CupertinoIcons.clock,
+                color: Theme.of(context).iconTheme.color,
+              ),
+              onPressed: () {
+                LocalNotificationHelper.showLocalNotification(
+                    message: "Your Month Survey is ready");
+              }),
+          IconButton(
+              icon: Icon(
+                CupertinoIcons.settings,
+                color: Theme.of(context).iconTheme.color,
+              ),
+              onPressed: () {
+                Navigator.pushNamed(context, AccountPage.route);
+              }),
           IconButton(
               icon: Icon(
                 Icons.logout,
                 color: Theme.of(context).iconTheme.color,
               ),
               onPressed: () {
+                Provider.of<SummaryProvider>(context, listen: false).reset();
                 Provider.of<AuthProvider>(context, listen: false).logout();
               }),
-          IconButton(
-              icon: Icon(
-                Icons.menu,
-                color: Theme.of(context).iconTheme.color,
-              ),
-              onPressed: () {
-                Navigator.pushNamed(context, AccountPage.route);
-              })
         ],
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
+      body: PageView(
+        controller: pageController,
+        onPageChanged: (_) {
+          if (_ != index) {
+            setState(() {
+              index = _;
+            });
+          }
+        },
+        children: children2,
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: () {
+          Provider.of<SummaryProvider>(context, listen: false)
+              .setfootPrintCurrentMonth(
+                  Provider.of<SummaryProvider>(context, listen: false)
+                          .footPrintCurrentMonth +
+                      100);
+        },
         tooltip: 'Increment',
         child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
+
+// This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }

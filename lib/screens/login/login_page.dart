@@ -59,15 +59,18 @@ class _LoginPageState extends State<LoginPage>
                   SizedBox(
                     height: MediaQuery.of(context).size.height / 15,
                   ),
-                  Text(
-                    "MCONNECT",
-                    style: TextStyle(
-                        fontSize: 50,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w600),
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Text(
+                      "CARBON CHALLENGE",
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline5!
+                          .copyWith(fontSize: 40),
+                    ),
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.height / 3,
+                    height: MediaQuery.of(context).size.height / 4,
                   ),
                   LoginTextField(
                       focusNode: _focusNode,

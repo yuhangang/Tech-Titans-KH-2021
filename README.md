@@ -1,6 +1,6 @@
 # tech_titans
 
-A new Flutter project.
+A gamified version of a carbon footprint tracking app made using flutter as part of the KitaHack Hackathon 2021
 
 ## Getting Started
 
