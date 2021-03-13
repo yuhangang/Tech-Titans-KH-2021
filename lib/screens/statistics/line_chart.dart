@@ -29,16 +29,13 @@ class ConsumptionChartState extends State<ConsumptionChart> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
-                  const SizedBox(
-                    height: 40,
-                  ),
                   Text(
-                    'Monthly Consumption',
+                    'Monthly FootPrint (Ton)',
                     style: Theme.of(context).textTheme.headline5!,
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(
-                    height: 37,
+                    height: 20,
                   ),
                   Expanded(
                     child: Container(
@@ -83,8 +80,64 @@ class ConsumptionChartState extends State<ConsumptionChart> {
                       ),
                     ),
                   ),
-                  const SizedBox(
-                    height: 30,
+                  SizedBox(
+                    height: 50,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Row(
+                          children: [
+                            Text("Transport"),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 8.0),
+                              child: ClipOval(
+                                child: Container(
+                                  color: const Color(0xFFFF4E74),
+                                  width: 20,
+                                  height: 20,
+                                ),
+                              ),
+                            ),
+                            SizedBox(width: 5)
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Text("Electricity"),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 8.0),
+                              child: ClipOval(
+                                child: Container(
+                                  color: Color(0xFF2D90F3),
+                                  width: 20,
+                                  height: 20,
+                                ),
+                              ),
+                            ),
+                            SizedBox(width: 5)
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Text("Food"),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 8.0),
+                              child: ClipOval(
+                                child: Container(
+                                  color: Color(0xFFA5E057),
+                                  width: 20,
+                                  height: 20,
+                                ),
+                              ),
+                            ),
+                            SizedBox(width: 5)
+                          ],
+                        )
+                      ],
+                    ),
                   ),
                 ],
               ),
@@ -138,7 +191,7 @@ class ConsumptionChartState extends State<ConsumptionChart> {
         show: true,
         border: const Border(
           bottom: BorderSide(
-            color: Color(0xff4e4965),
+            color: Color(0xFFA5E057),
             width: 4,
           ),
           left: BorderSide(
